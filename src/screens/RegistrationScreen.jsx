@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, TextInput, View, Text } from "react-native";
+import { TextInput, View, Text } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Title } from "../components/Title";
 import { Background } from "../components/Background";
+import { Button } from "../components/Button";
 
 export const RegistrationScreen = () => {
   const formik = useFormik({
