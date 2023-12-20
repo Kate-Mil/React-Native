@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { RegistrationScreen } from "./src/screens/RegistrationScreen";
 import { useFonts } from "expo-font";
 
@@ -15,16 +15,16 @@ const App = () => {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <RegistrationScreen />
-    </View>
+    // <SafeAreaView style={styles.container}>
+    <RegistrationScreen />
+    // </SafeAreaView>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

@@ -1,12 +1,43 @@
 import React from "react";
-import { TextInput, View, Text } from "react-native";
+import { useState } from "react";
+import { TextInput, View, Text, StyleSheet } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Title } from "../components/Title";
 import { Background } from "../components/Background";
 import { Button } from "../components/Button";
+import { AddPhoto } from "../components/AddPhoto";
 
 export const RegistrationScreen = () => {
+  const [focusedInput, setFocusedInput] = useState(null);
+
+  const handleFocus = (inputName) => {
+    setFocusedInput(inputName);
+  };
+
+  const handleBlur = () => {
+    setFocusedInput(null);
+  };
+
+  const getInputStyle = (inputName) => {
+    switch (inputName) {
+      case "login":
+        return focusedInput === "login"
+          ? [styles.input, styles.inputFocused]
+          : styles.input;
+      case "email":
+        return focusedInput === "email"
+          ? [styles.input, styles.inputFocused]
+          : styles.input;
+      case "password":
+        return focusedInput === "password"
+          ? [styles.input, styles.inputFocused]
+          : styles.input;
+      default:
+        return styles.input;
+    }
+  };
+
   const formik = useFormik({
     initialValues: { login: "", email: "", password: "" },
     validationSchema: Yup.object({
@@ -23,45 +54,92 @@ export const RegistrationScreen = () => {
       resetForm();
     },
   });
+
   return (
-    <View>
-      <Background>
+    <Background>
+      <View style={styles.wrapper}>
+        <AddPhoto />
         <Title title={"Реєстрація"} />
-        <View>
+        <View style={styles.inputWrapper}>
           <TextInput
+            style={getInputStyle("login")}
             onChangeText={formik.handleChange("login")}
-            onBlur={formik.handleBlur("login")}
+            onFocus={() => handleFocus("login")}
+            onBlur={handleBlur}
             value={formik.values.login}
             placeholder={"Логін"}
             name="login"
           />
           {formik.touched.login && formik.errors.login ? (
-            <Text>{formik.errors.login}</Text>
+            <Text style={styles.baseErrorTextStyle}>{formik.errors.login}</Text>
           ) : null}
           <TextInput
+            style={getInputStyle("email")}
             onChangeText={formik.handleChange("email")}
-            onBlur={formik.handleBlur("email")}
+            onFocus={() => handleFocus("email")}
+            onBlur={handleBlur}
             value={formik.values.email}
             placeholder={"Адреса електронної пошти"}
             name="email"
           />
           {formik.touched.email && formik.errors.email ? (
-            <Text>{formik.errors.email}</Text>
+            <Text style={styles.baseErrorTextStyle}>{formik.errors.email}</Text>
           ) : null}
 
           <TextInput
+            style={getInputStyle("password")}
             onChangeText={formik.handleChange("password")}
-            onBlur={formik.handleBlur("password")}
+            onFocus={() => handleFocus("password")}
+            onBlur={handleBlur}
             value={formik.values.password}
             placeholder={"Пароль"}
             name="password"
           />
           {formik.touched.password && formik.errors.password ? (
-            <Text>{formik.errors.password}</Text>
+            <Text style={styles.baseErrorTextStyle}>
+              {formik.errors.password}
+            </Text>
           ) : null}
-          <Button onPress={formik.handleSubmit} title="Зареєстуватися" />
         </View>
-      </Background>
-    </View>
+        <Button onPress={formik.handleSubmit} title="Зареєстуватися" />
+      </View>
+    </Background>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: "#fff",
+    paddingTop: 90,
+    paddingHorizontal: 16,
+    paddingBottom: 66,
+  },
+  inputWrapper: {
+    width: "100%",
+    marginBottom: 43,
+    gap: 16,
+  },
+  input: {
+    height: 50,
+    borderRadius: 8,
+    paddingLeft: 16,
+    paddingHorizontal: 16,
+    color: "#212121",
+    fontFamily: "rb-regular",
+    fontSize: 16,
+    lineHeight: 16,
+    backgroundColor: "#F6F6F6",
+    fontWeight: "700",
+    borderWidth: 1,
+    borderColor: "#F6F6F6",
+  },
+  inputFocused: { borderColor: "#FF6C00" },
+  baseErrorTextStyle: {
+    color: "#FF6C00",
+    fontSize: 16,
+    fontFamily: "rb-regular",
+    fontWeight: "700",
+  },
+});

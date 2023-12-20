@@ -21,10 +21,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: "center",
+    width: "100%",
+    justifyContent: "flex-end",
   },
-  // image: {
-  //   flex: 1,
-  //   justifyContent: "flex-end",
-  // },
 });

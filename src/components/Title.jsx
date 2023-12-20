@@ -11,7 +11,8 @@ export const Title = ({ title }) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginBottom: 32,
+    paddingTop: 32,
+    marginBottom: 33,
   },
   title: {
     color: "#212121",
