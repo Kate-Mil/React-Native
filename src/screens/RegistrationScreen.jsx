@@ -4,9 +4,10 @@ import { TextInput, View, Text, StyleSheet } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Title } from "../components/Title";
+import { AddPhoto } from "../components/AddPhoto";
 import { Background } from "../components/Background";
 import { Button } from "../components/Button";
-import { AddPhoto } from "../components/AddPhoto";
+import { Link } from "../components/Link";
 
 export const RegistrationScreen = () => {
   const [focusedInput, setFocusedInput] = useState(null);
@@ -102,6 +103,7 @@ export const RegistrationScreen = () => {
           ) : null}
         </View>
         <Button onPress={formik.handleSubmit} title="Зареєстуватися" />
+        <Link>Вже є акаунт? Увійти</Link>
       </View>
     </Background>
   );
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: "#fff",
-    paddingTop: 90,
+    paddingTop: 92,
     paddingHorizontal: 16,
     paddingBottom: 66,
   },
