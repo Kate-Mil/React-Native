@@ -12,6 +12,7 @@ import { KeyboardWrapper } from "../components/KeyboardWrapper";
 
 export const LoginScreen = () => {
   const [focusedInput, setFocusedInput] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleFocus = (inputName) => {
     setFocusedInput(inputName);
@@ -23,10 +24,6 @@ export const LoginScreen = () => {
 
   const getInputStyle = (inputName) => {
     switch (inputName) {
-      case "login":
-        return focusedInput === "login"
-          ? [styles.input, styles.inputFocused]
-          : styles.input;
       case "email":
         return focusedInput === "email"
           ? [styles.input, styles.inputFocused]
@@ -41,11 +38,8 @@ export const LoginScreen = () => {
   };
 
   const formik = useFormik({
-    initialValues: { login: "", email: "", password: "" },
+    initialValues: { email: "", password: "" },
     validationSchema: Yup.object({
-      login: Yup.string()
-        .max(15, "Must be 15 characters or less")
-        .required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string()
         .min(6, "Must be 6 characters or more")
@@ -63,37 +57,44 @@ export const LoginScreen = () => {
         <View style={styles.wrapper}>
           <Title title={"Увійти"} />
           <View style={styles.inputWrapper}>
-            <TextInput
-              style={getInputStyle("email")}
-              onChangeText={formik.handleChange("email")}
-              onFocus={() => handleFocus("email")}
-              onBlur={handleBlur}
-              value={formik.values.email}
-              placeholder={"Адреса електронної пошти"}
-              name="email"
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <Text style={styles.baseErrorTextStyle}>
-                {formik.errors.email}
-              </Text>
-            ) : null}
-
-            <TextInput
-              style={getInputStyle("password")}
-              onChangeText={formik.handleChange("password")}
-              onFocus={() => handleFocus("password")}
-              onBlur={handleBlur}
-              value={formik.values.password}
-              placeholder={"Пароль"}
-              name="password"
-            />
-            {formik.touched.password && formik.errors.password ? (
-              <Text style={styles.baseErrorTextStyle}>
-                {formik.errors.password}
-              </Text>
-            ) : null}
-            <ShowPassword onPress={() => console.log("====")} />
+            <View>
+              <TextInput
+                style={getInputStyle("email")}
+                onChangeText={formik.handleChange("email")}
+                onFocus={() => handleFocus("email")}
+                onBlur={handleBlur}
+                value={formik.values.email}
+                placeholder={"Адреса електронної пошти"}
+                name="email"
+              />
+              {formik.touched.email && formik.errors.email ? (
+                <Text style={styles.baseErrorTextStyle}>
+                  {formik.errors.email}
+                </Text>
+              ) : null}
+            </View>
+            <View style={(position = "relative")}>
+              <TextInput
+                style={getInputStyle("password")}
+                onChangeText={formik.handleChange("password")}
+                onFocus={() => handleFocus("password")}
+                onBlur={handleBlur}
+                value={formik.values.password}
+                placeholder={"Пароль"}
+                name="password"
+                secureTextEntry={!showPassword}
+              />
+              {formik.touched.password && formik.errors.password ? (
+                <Text style={styles.baseErrorTextStyle}>
+                  {formik.errors.password}
+                </Text>
+              ) : null}
+              <ShowPassword
+                onPress={() => setShowPassword((prevState) => !prevState)}
+              />
+            </View>
           </View>
+
           <Button onPress={formik.handleSubmit} title="Увійти" />
           <Link>
             Немає акаунту? <Text style={styles.linkText}>Зареєструватися</Text>

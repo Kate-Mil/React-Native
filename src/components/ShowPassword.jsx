@@ -10,14 +10,12 @@ export const ShowPassword = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    position: "absolute",
+    top: 16,
+    right: 16,
   },
   text: {
-    position: "absolute",
-    top: -52,
-    right: 16,
     color: "#1B4371",
-    textAlign: "center",
     fontFamily: "rb-regular",
     fontSize: 16,
   },

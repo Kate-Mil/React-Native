@@ -25,6 +25,6 @@ export const KeyboardWrapper = ({ children }) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingTop: 145,
+    paddingTop: 119,
   },
 });
