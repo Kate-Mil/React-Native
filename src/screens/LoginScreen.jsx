@@ -7,6 +7,7 @@ import { Title } from "../components/Title";
 import { Background } from "../components/Background";
 import { Button } from "../components/Button";
 import { Link } from "../components/Link";
+import { ShowPassword } from "../components/ShowPassword";
 
 export const LoginScreen = () => {
   const [focusedInput, setFocusedInput] = useState(null);
@@ -87,6 +88,7 @@ export const LoginScreen = () => {
               {formik.errors.password}
             </Text>
           ) : null}
+          <ShowPassword onPress={() => console.log("====")} />
         </View>
         <Button onPress={formik.handleSubmit} title="Увійти" />
         <Link>
