@@ -7,6 +7,7 @@ import { Title } from "../components/Title";
 import { Background } from "../components/Background";
 import { Button } from "../components/Button";
 import { Link } from "../components/Link";
+import { KeyboardWrapper } from "../components/KeyboardWrapper";
 
 export const LoginScreen = () => {
   const [focusedInput, setFocusedInput] = useState(null);
@@ -57,42 +58,46 @@ export const LoginScreen = () => {
 
   return (
     <Background>
-      <View style={styles.wrapper}>
-        <Title title={"Увійти"} />
-        <View style={styles.inputWrapper}>
-          <TextInput
-            style={getInputStyle("email")}
-            onChangeText={formik.handleChange("email")}
-            onFocus={() => handleFocus("email")}
-            onBlur={handleBlur}
-            value={formik.values.email}
-            placeholder={"Адреса електронної пошти"}
-            name="email"
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <Text style={styles.baseErrorTextStyle}>{formik.errors.email}</Text>
-          ) : null}
+      <KeyboardWrapper>
+        <View style={styles.wrapper}>
+          <Title title={"Увійти"} />
+          <View style={styles.inputWrapper}>
+            <TextInput
+              style={getInputStyle("email")}
+              onChangeText={formik.handleChange("email")}
+              onFocus={() => handleFocus("email")}
+              onBlur={handleBlur}
+              value={formik.values.email}
+              placeholder={"Адреса електронної пошти"}
+              name="email"
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <Text style={styles.baseErrorTextStyle}>
+                {formik.errors.email}
+              </Text>
+            ) : null}
 
-          <TextInput
-            style={getInputStyle("password")}
-            onChangeText={formik.handleChange("password")}
-            onFocus={() => handleFocus("password")}
-            onBlur={handleBlur}
-            value={formik.values.password}
-            placeholder={"Пароль"}
-            name="password"
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <Text style={styles.baseErrorTextStyle}>
-              {formik.errors.password}
-            </Text>
-          ) : null}
+            <TextInput
+              style={getInputStyle("password")}
+              onChangeText={formik.handleChange("password")}
+              onFocus={() => handleFocus("password")}
+              onBlur={handleBlur}
+              value={formik.values.password}
+              placeholder={"Пароль"}
+              name="password"
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <Text style={styles.baseErrorTextStyle}>
+                {formik.errors.password}
+              </Text>
+            ) : null}
+          </View>
+          <Button onPress={formik.handleSubmit} title="Увійти" />
+          <Link>
+            Немає акаунту? <Text style={styles.linkText}>Зареєструватися</Text>
+          </Link>
         </View>
-        <Button onPress={formik.handleSubmit} title="Увійти" />
-        <Link>
-          Немає акаунту? <Text style={styles.linkText}>Зареєструватися</Text>
-        </Link>
-      </View>
+      </KeyboardWrapper>
     </Background>
   );
 };
