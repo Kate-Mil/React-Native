@@ -8,6 +8,7 @@ import { AddPhoto } from "../components/AddPhoto";
 import { Background } from "../components/Background";
 import { Button } from "../components/Button";
 import { Link } from "../components/Link";
+import { ShowPassword } from "../components/ShowPassword";
 import { KeyboardWrapper } from "../components/KeyboardWrapper";
 
 export const RegistrationScreen = () => {
@@ -107,6 +108,7 @@ export const RegistrationScreen = () => {
                 {formik.errors.password}
               </Text>
             ) : null}
+            <ShowPassword onPress={() => console.log("====")} />
           </View>
           <Button onPress={formik.handleSubmit} title="Зареєстуватися" />
           <Link>Вже є акаунт? Увійти</Link>
