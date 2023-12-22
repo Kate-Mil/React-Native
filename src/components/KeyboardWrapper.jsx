@@ -1,30 +1,21 @@
 import React from "react";
 import {
   StyleSheet,
-  View,
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
 } from "react-native";
 
-export const KeyboardWrapper = ({ children }) => {
+export const KeyboardWrapper = ({ children, style }) => {
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View>
-        <KeyboardAvoidingView
-          style={styles.wrapper}
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        >
-          {children}
-        </KeyboardAvoidingView>
-      </View>
-    </TouchableWithoutFeedback>
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView style={style}>{children}</ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    paddingTop: 119,
-  },
-});

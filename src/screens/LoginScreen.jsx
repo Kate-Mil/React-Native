@@ -53,7 +53,7 @@ export const LoginScreen = () => {
 
   return (
     <Background>
-      <KeyboardWrapper>
+      <KeyboardWrapper style={{ paddingTop: 273 }}>
         <View style={styles.wrapper}>
           <Title title={"Увійти"} />
           <View style={styles.inputWrapper}>

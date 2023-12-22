@@ -16,8 +16,8 @@ const App = () => {
   }
 
   return (
-    // <LoginScreen />
-    <RegistrationScreen />
+    <LoginScreen />
+    // <RegistrationScreen />
   );
 };
 

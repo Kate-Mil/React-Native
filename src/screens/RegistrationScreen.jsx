@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { TextInput, View, Text, StyleSheet } from "react-native";
+import { TextInput, View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Title } from "../components/Title";
@@ -61,9 +61,9 @@ export const RegistrationScreen = () => {
 
   return (
     <Background>
-      <KeyboardWrapper>
+      <KeyboardWrapper style={{ paddingTop: 147 }}>
+        <AddPhoto />
         <View style={styles.wrapper}>
-          <AddPhoto />
           <Title title={"Реєстрація"} />
           <View style={styles.inputWrapper}>
             <View>
