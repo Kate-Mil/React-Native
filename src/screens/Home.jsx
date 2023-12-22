@@ -1,5 +1,5 @@
 import React from "react";
 
-export const PostsScreen = () => {
+export const Home = () => {
   return <></>;
 };
